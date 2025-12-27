@@ -2,59 +2,111 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-        <title>Birthday Timeline Generator</title>
-            <style>
-                    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 50px; background-color: #f0f2f5; }
-                            .card { background: white; padding: 30px; border-radius: 15px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-                                    input, button { padding: 12px; margin: 10px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; }
-                                            button { background-color: #25D366; color: white; border: none; cursor: pointer; font-weight: bold; }
-                                                    button:hover { background-color: #128C7E; }
-                                                        </style>
-                                                        </head>
-                                                        <body>
-                                                            <div class="card">
-                                                                    <h2>🎂 Life Timeline Generator</h2>
-                                                                            <p>Enter your birthday to see your journey!</p>
-                                                                                    <input type="date" id="dob">
-                                                                                            <br>
-                                                                                                    <button onclick="shareToWhatsApp()">Generate & Share to WhatsApp</button>
-                                                                                                        </div>
+    <title>Birthday Timeline Generator</title>
+    <style>
+        /* 1. Animated Gradient Background */
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            text-align: center; 
+            padding: 50px; 
+            margin: 0;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-                                                                                                            <script>
-                                                                                                                    function shareToWhatsApp() {
-                                                                                                                                const dobValue = document.getElementById('dob').value;
-                                                                                                                                            if (!dobValue) { alert("Please select your birth date!"); return; }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-                                                                                                                                                        const birthDate = new Date(dobValue);
-                                                                                                                                                                    const today = new Date();
-                                                                                                                                                                                const bYear = birthDate.getFullYear();
-                                                                                                                                                                                            
-                                                                                                                                                                                                        // Calculate Age
-                                                                                                                                                                                                                    let age = today.getFullYear() - bYear;
-                                                                                                                                                                                                                                const m = today.getMonth() - birthDate.getMonth();
-                                                                                                                                                                                                                                            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
+        /* 2. Glassmorphism Card Effect */
+        .card { 
+            background: rgba(255, 255, 255, 0.9); 
+            backdrop-filter: blur(10px);
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            max-width: 400px;
+        }
 
-                                                                                                                                                                                                                                                        // Build Timeline Logic (Mirroring your C code)
-                                                                                                                                                                                                                                                                    let message = `🥳 I am ${age} years old today! 🎈\n\n--- My Life Timeline ---`;
-                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                            for (let i = 0; i <= age; i++) {
-                                                                                                                                                                                                                                                                                                            let currentYear = bYear + i;
-                                                                                                                                                                                                                                                                                                                            let status, emoji;
+        h2 { color: #e73c7e; margin-bottom: 10px; }
+        p { color: #555; }
 
-                                                                                                                                                                                                                                                                                                                                            if (i > 20) { status = "Reality"; emoji = "💼"; }
-                                                                                                                                                                                                                                                                                                                                                            else if (i > 18) { status = "Skeptical"; emoji = "🤨"; }
-                                                                                                                                                                                                                                                                                                                                                                            else if (i > 15) { status = "Puberic"; emoji = "🧬"; }
-                                                                                                                                                                                                                                                                                                                                                                                            else if (i > 12) { status = "Aesthetic"; emoji = "🎨"; }
-                                                                                                                                                                                                                                                                                                                                                                                                            else if (i > 5) { status = "Naive"; emoji = "🎒"; }
-                                                                                                                                                                                                                                                                                                                                                                                                                            else if (i > 2) { status = "Innocent"; emoji = "🧸"; }
-                                                                                                                                                                                                                                                                                                                                                                                                                                            else { status = "Infant"; emoji = "🍼"; }
+        /* 3. Styled Inputs */
+        input[type="date"] { 
+            padding: 12px; 
+            margin: 20px 0; 
+            font-size: 16px; 
+            border-radius: 50px; 
+            border: 2px solid #23a6d5; 
+            outline: none;
+            width: 80%;
+            text-align: center;
+        }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            message += `\n${currentYear} ${emoji}: ${status}`;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
+        /* 4. Vibrant WhatsApp Button */
+        button { 
+            background: linear-gradient(to right, #25D366, #128C7E);
+            color: white; 
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none; 
+            border-radius: 50px;
+            cursor: pointer; 
+            font-weight: bold; 
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    // Redirect to WhatsApp
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                window.location.href = `https://wa.me/?text=${encodeURIComponent(message)}`;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </script>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </body>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </html>
+        button:hover { 
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>🎂 Life Timeline</h2>
+        <p>Your journey in one click!</p>
+        <input type="date" id="dob">
+        <br>
+        <button onclick="shareToWhatsApp()">Share to WhatsApp 🚀</button>
+    </div>
+
+    <script>
+        // ... (Same JavaScript function as your original code) ...
+        function shareToWhatsApp() {
+            const dobValue = document.getElementById('dob').value;
+            if (!dobValue) { alert("Please select your birth date!"); return; }
+            const birthDate = new Date(dobValue);
+            const today = new Date();
+            const bYear = birthDate.getFullYear();
+            let age = today.getFullYear() - bYear;
+            const m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
+            let message = `🥳 I am ${age} years old today! 🎈\n\n--- My Life Timeline ---`;
+            for (let i = 0; i <= age; i++) {
+                let currentYear = bYear + i;
+                let status, emoji;
+                if (i > 20) { status = "Reality"; emoji = "💼"; }
+                else if (i > 18) { status = "Skeptical"; emoji = "🤨"; }
+                else if (i > 15) { status = "Puberic"; emoji = "🧬"; }
+                else if (i > 12) { status = "Aesthetic"; emoji = "🎨"; }
+                else if (i > 5) { status = "Naive"; emoji = "🎒"; }
+                else if (i > 2) { status = "Innocent"; emoji = "🧸"; }
+                else { status = "Infant"; emoji = "🍼"; }
+                message += `\n${currentYear} ${emoji}: ${status}`;
+            }
+            window.location.href = `https://wa.me/?text=${encodeURIComponent(message)}`;
+        }
+    </script>
+</body>
+</html>
